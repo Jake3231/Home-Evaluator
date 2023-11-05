@@ -164,6 +164,14 @@ struct RoomScanViewController: UIViewControllerRepresentable {
                     DispatchQueue.main.async {
                         self.result.capturedRooms.append(room)
                         print("APPENDING ROOM")
+                        /*for floor in room.floors {
+                            if (floor.category == .floor) {
+                                print(floor.dimensions)
+                                let areaEstimate = floor.dimensions.x * floor.dimensions.y
+                                let areaInSqFt = areaEstimate * 10.7639
+                                print("Area in SQ FT: \(areaInSqFt)")
+                            }
+                        }*/
                     }
                 }
             }
