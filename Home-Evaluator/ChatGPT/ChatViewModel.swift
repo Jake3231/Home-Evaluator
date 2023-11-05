@@ -1,12 +1,24 @@
 import Foundation
 extension ChatView{
     class ViewModel: ObservableObject {
-        @Published var messages: [Message] = []
-        
+		
+		private var address: String?
+		@Published var messages: [Message] = []
         @Published var currentInput: String = ""
+		private let openAIService: OpenAIService?
+		
+		
+		init(address: String) {
+			openAIService = OpenAIService(address: address)
+			self.address = address
+		}
+		
         
-        private let openAIService = OpenAIService()
         func sendMessage(){
+			guard let openAIService = openAIService else {
+				print("Error on OAI service.")
+			}
+			
             let newMessage = Message(id: UUID(), role: .user, content:currentInput, createAt:Date())
             messages.append(newMessage)
             currentInput = ""

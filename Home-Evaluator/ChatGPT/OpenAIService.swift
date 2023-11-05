@@ -3,10 +3,17 @@ import Alamofire
 
 class OpenAIService {
     
-    private var address = "14710 Cypress Ridge Drive, Cypress, Texas"
+	private var address: String?
     private let chatEndpoint = "https://4107-129-110-241-55.ngrok-free.app/"
+	
+	init(address: String) {
+		self.address = address
+	}
     
-    func SendMessage(input: String) async -> String?{
+    func SendMessage(input: String) async -> String? {
+		guard let address = address else {
+			return "No address."
+		}
         let newURL = chatEndpoint + "chat?address=" + address + "&input=" + input
         do {
             let req = try await AF.request(newURL, method: .get).serializingString().value
