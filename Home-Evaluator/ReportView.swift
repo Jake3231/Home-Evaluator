@@ -109,7 +109,7 @@ struct ReportView: View {
             }
             .listSectionSpacing(50)
             Section("Rooms") {
-                ForEach(capturedRooms, id: \.identifier) {room in
+                ForEach(capturedRooms, id: \.identifier) { room in
                     ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
                         .listRowSeparator(.hidden)
                         .task {
@@ -132,7 +132,7 @@ struct ReportView: View {
                     .frame(height: 60)
                     .overlay {
                         HStack {
-                            Text("This is a prompt we can ask?")
+                            Text("Could green energy sources be utilized?")
                             Spacer()
                             Image(systemName: "arrow.right")
                         }
@@ -140,7 +140,32 @@ struct ReportView: View {
                     }
                     .listRowSeparator(.hidden)
                     .tint(Color("HexPurple"))
-                
+				RoundedRectangle(cornerRadius: 20)
+					.foregroundStyle(Color("HexGray"))
+					.frame(height: 60)
+					.overlay {
+						HStack {
+							Text("Is there risk for flooding?")
+							Spacer()
+							Image(systemName: "arrow.right")
+						}
+						.padding()
+					}
+					.listRowSeparator(.hidden)
+					.tint(Color("HexPurple"))
+				RoundedRectangle(cornerRadius: 20)
+					.foregroundStyle(Color("HexGray"))
+	 .frame(height: 60)
+	 .overlay {
+		 HStack {
+			 Text("How is the air quality?")
+			 Spacer()
+			 Image(systemName: "arrow.right")
+		 }
+		 .padding()
+	 }
+	 .listRowSeparator(.hidden)
+	 .tint(Color("HexPurple"))
                     Button(action: {shouldShowFinalView = true}, label: {
                         Label(
                             title: { Text("More Insights") },
