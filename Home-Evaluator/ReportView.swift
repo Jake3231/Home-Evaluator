@@ -104,20 +104,24 @@ struct ReportView: View {
                     }
                     .listRowSeparator(.hidden)
                 .tint(Color("HexPurple"))
-                Button(action: {print("GPT!")}, label: {
-                    Label(
-                        title: { Text("More Insights") },
-                        icon: { Image(systemName: "lightbulb.max") }
-                    )
-                    .frame(width: 300, height: 30)
+                
+                NavigationLink(isActive: $shouldShowFinalView, destination: {ChatView()}, label: {
+                    Button(action: {shouldShowFinalView = true}, label: {
+                        Label(
+                            title: { Text("More Insights") },
+                            icon: { Image(systemName: "lightbulb.max") }
+                        )
+                        .frame(width: 300, height: 30)
+                    })
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
+                    .tint(Color("HexPurple"))
+                    .foregroundStyle(Color.white)
+                    //.frame(width: 50)
+                    .padding()
+                        .listRowSeparator(.hidden)
                 })
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.capsule)
-                .tint(Color("HexPurple"))
-                .foregroundStyle(Color.white)
-                //.frame(width: 50)
-                .padding()
-                    .listRowSeparator(.hidden)
+                
             }
             //  })
            /* DisclosureGroup(content: {
