@@ -235,9 +235,6 @@ struct StructureModelRow: View {
                             print("structure model ready")
                         }
                     })
-                    .task {
-
-                    }
             }
         }
         .listRowSeparator(.hidden)
@@ -264,7 +261,7 @@ struct ReportRow: View {
                                 .clipped()
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text("Room 1")
+                                    Text("Room")
                                         .font(.title3)
                                     Text("\(roomSqFt) SQ FT")
                                         .foregroundStyle(.secondary)
