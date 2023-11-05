@@ -7,66 +7,51 @@
 
 import SwiftUI
 import MapKit
+import RoomPlan
 
 struct AddressView: View {
     @ObservedObject var locManager: LocationManager
     @State var image: UIImage
+    @State var addrString: String = ""
+    @Binding var capturedRooms: [CapturedRoom]
+
     var body: some View {
         VStack {
+            Text("Confirm Location")
+                .font(.title3)
+                .padding(.top, 20)
             Image(uiImage: image)
                 .resizable()
                 .scaledToFill()
-                .frame(height: 250)
-               // .background(content: {Color.red})
-               /* .overlay(alignment: .bottom, content: {
-                    ZStack(alignment: .bottom) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 350)
-                            .blur(radius: 20) /// blur the image
-                            .padding(-20) /// expand the blur a bit to cover the edges
-                            .clipped() /// prevent blur overflow
-                    }})*/
-               /* .overlay(alignment: .bottomLeading) {
-                    Text(locManager.userAddress)
-                        .font(.title.bold())
-                        .foregroundStyle(Color.white)
-                        .background(.ultraThinMaterial)
-                        .task {
-                            print(locManager.checkAvailability())
-                            image = await locManager.getSnapshotForLocation()
-                        }
+                .frame(height: 150)
+               /* .overlay(alignment: .top) {
+                    Rectangle()
+                        .foregroundColor(.black)
+                        .frame(height: 80)
+                        .blur(radius: 60)
                 }*/
-                .ignoresSafeArea(edges: .top)
-            Text(locManager.userAddress)
-                .font(.title.bold())
-                .foregroundStyle(Color.white)
+            TextField("Address", text: $addrString)
+                .textFieldStyle(.roundedBorder)
+                .padding([.top, .leading, .trailing])
                 .task {
-                    print(locManager.checkAvailability())
+                    addrString = locManager.userAddress
+                }
+                .task {
                     image = await locManager.getSnapshotForLocation()
                 }
-                .padding(.top, 0)
             Spacer()
-            Text("Is this your address?")
-                .font(.system(size: 35))
-                .padding([.bottom, .leading, .trailing])
-                .padding(.top, -50)
-            Button("Confirm") {
-                
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.extraLarge)
-            .tint(.green)
-            Button("Edit") {
-                
-            }
-            .buttonStyle(.borderless)
-            Spacer()
+            NavigationLink(destination: ReportView(capturedRooms: $capturedRooms), label: {
+                Button("Confirm Address") {
+                    
+                }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+            })
         }
+        //ListingCard(image: image, listing: locManager.locManager.location!)
     }
 }
 
 #Preview {
-    AddressView(locManager: LocationManager(), image: UIImage())
+    AddressView(locManager: LocationManager(), image: UIImage(), capturedRooms: .constant([]))
 }

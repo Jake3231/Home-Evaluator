@@ -16,6 +16,7 @@
 		233DF6AD2AF70CB00020F2F8 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6AC2AF70CB00020F2F8 /* ReportView.swift */; };
 		233DF6AF2AF725EF0020F2F8 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6AE2AF725EF0020F2F8 /* AddressView.swift */; };
 		233DF6B12AF726500020F2F8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6B02AF726500020F2F8 /* LocationManager.swift */; };
+		2352C6B62AF788E600549584 /* SavedScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352C6B52AF788E600549584 /* SavedScan.swift */; };
 		2360AC442AF740F8007FB308 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360AC432AF740F8007FB308 /* ScannerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		233DF6AC2AF70CB00020F2F8 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		233DF6AE2AF725EF0020F2F8 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		233DF6B02AF726500020F2F8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		2352C6B52AF788E600549584 /* SavedScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScan.swift; sourceTree = "<group>"; };
 		2360AC432AF740F8007FB308 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +73,7 @@
 				233DF6AE2AF725EF0020F2F8 /* AddressView.swift */,
 				233DF6B02AF726500020F2F8 /* LocationManager.swift */,
 				233DF6AA2AF6F7120020F2F8 /* ListingCard.swift */,
+				2352C6B52AF788E600549584 /* SavedScan.swift */,
 				233DF6A82AF6DB8B0020F2F8 /* RoomCaptureViewController.swift */,
 				233DF69D2AF6D7330020F2F8 /* Assets.xcassets */,
 				233DF69F2AF6D7330020F2F8 /* Home_Evaluator.entitlements */,
@@ -162,6 +165,7 @@
 				233DF69C2AF6D7300020F2F8 /* ContentView.swift in Sources */,
 				233DF69A2AF6D7300020F2F8 /* Home_EvaluatorApp.swift in Sources */,
 				233DF6B12AF726500020F2F8 /* LocationManager.swift in Sources */,
+				2352C6B62AF788E600549584 /* SavedScan.swift in Sources */,
 				233DF6AD2AF70CB00020F2F8 /* ReportView.swift in Sources */,
 				233DF6A92AF6DB8B0020F2F8 /* RoomCaptureViewController.swift in Sources */,
 				233DF6AF2AF725EF0020F2F8 /* AddressView.swift in Sources */,

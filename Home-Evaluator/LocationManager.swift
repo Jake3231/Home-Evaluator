@@ -47,8 +47,21 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return image
     }
     
-    func getSnapshotFor(address: String) {
-        
+    func getSnapshotFor(address: CLLocation) async -> UIImage {
+        var image: UIImage!
+        await withCheckedContinuation { continuation in
+            print(address.coordinate.longitude)
+            let request = MKLookAroundSceneRequest(coordinate: address.coordinate)
+            request.getSceneWithCompletionHandler{scene, error in
+                let options = MKLookAroundSnapshotter.Options()
+                options.pointOfInterestFilter = .excludingAll
+                MKLookAroundSnapshotter(scene: scene!, options: options).getSnapshotWithCompletionHandler({snapshot, error in
+                   image = snapshot?.image
+                    continuation.resume()
+                })
+            }
+        }
+        return image
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

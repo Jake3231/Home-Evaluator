@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RoomPlan
+import CoreLocation
 
 struct ContentView: View {
     @State var isScanning: Bool = false
@@ -14,21 +15,25 @@ struct ContentView: View {
     @State var capturedRooms: [CapturedRoom] = []
     @ObservedObject var results: CapturedRoomScan = .init(capturedRooms: [])
     @ObservedObject var locManager = LocationManager()
+    
+    @State var searchText: String = ""
 
     var body: some View {
         NavigationStack {
             ZStack {
-                List {
+                List(defaultScans) { scan in
                     /*  NavigationLink("", isActive: $isScanning) {
                      ScannerView(isScanning: $isScanning, structureScanComplete: $structureScanComplete, results: results, locManager: locManager)
                      }*/
-                    ListingCard(locationManger: locManager, listing: "2200 Waterview Pkwy")
-                    
-                    ListingCard(locationManger: locManager, listing: "13107 Boheme Dr")
+                    ListingCard(locationManger: locManager, title: scan.title, streetAddr: scan.streetAddress ?? "", listing: scan.location)
                 }
+                .searchable(text: $searchText, prompt: "Search Properties...")
                 .listStyle(.plain)
-                .navigationTitle("Nebula Rooms")
+                .navigationTitle("Hex")
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Image("Hex")
+                    }
                     ToolbarItemGroup(placement: .secondaryAction) {
                         Button(action: {print("hi")}, label: {Image(systemName: "gear")})
                     }
@@ -45,17 +50,28 @@ struct ContentView: View {
                 .task {
                     locManager.checkAvailability()
                 }
-                Button(action: {isScanning = true}, label: {
-                    Label(
-                        title: { Text("Start Scan") },
-                        icon: { /*@START_MENU_TOKEN@*/Image(systemName: "42.circle")/*@END_MENU_TOKEN@*/ }
-                    )
-                })
+                .overlay(alignment: .bottom) {
+                    NavigationLink(isActive: $isScanning, destination: {
+                        ScannerView(isScanning: $isScanning, structureScanComplete: $structureScanComplete, results: results, locManager: locManager)}, label: {
+                            Button(action: {isScanning = true}, label: {
+                                Label(
+                                    title: { Text("Start Scan") },
+                                    icon: { Image(systemName: "camera.viewfinder") }
+                                )
+                                .frame(width: 300, height: 30)
+                            })
+                            .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
+                            //.frame(width: 50)
+                            .padding()
+                        })
+                    
+                }
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(searchText: "")
 }

@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ListingCard: View {
     var locationManger: LocationManager!
     @State var image: UIImage = UIImage()
-    var listing: String
+    @State var title: String = "Title"
+    @State var streetAddr: String = "Address unknown"
+    var listing: CLLocation
+    
     var body: some View {
             RoundedRectangle(cornerRadius: 10, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/)
                 .foregroundStyle(.background.secondary)
@@ -32,16 +36,18 @@ struct ListingCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .overlay(alignment: .bottomLeading) {
                     VStack(alignment: .leading) {
-                        Text("Title")
+                        Text(title)
                             .font(.title.bold())
-                        Label(title: {Text(listing)}, icon: {Image(systemName: "mappin.circle")})
+                        Label(title: {
+                            Text(streetAddr)
+                        }, icon: {Image(systemName: "mappin.circle")})
                             .font(.subheadline)
                             .foregroundColor(.white)
                     }
                     .padding(10)
                 }
                 .task {
-                    image = await locationManger.getSnapshotForLocation()
+                    image = await locationManger.getSnapshotFor(address: listing)
                 }
         .frame(height: 210)
         .listRowSeparator(.hidden, edges: /*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -49,5 +55,5 @@ struct ListingCard: View {
 }
 
 #Preview {
-    ListingCard(locationManger: LocationManager(), image: UIImage(), listing: "2200 Waterview Pkwy")
+    ListingCard(locationManger: LocationManager(), image: UIImage(), listing: CLLocation())
 }
