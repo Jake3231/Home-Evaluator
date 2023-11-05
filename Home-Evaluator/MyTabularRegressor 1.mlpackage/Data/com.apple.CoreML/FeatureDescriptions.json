@@ -1,0 +1,48 @@
+{
+  "Outputs" : {
+    "PRICE" : {
+      "MLFeatureShortDescription" : "An estimate of home value based on given factors."
+    }
+  },
+  "Inputs" : {
+    "LATITUDE" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "BATHS" : {
+      "MLFeatureShortDescription" : "Number of bathrooms. Can be fractional for half baths."
+    },
+    "CITY" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "HOA\/MONTH" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "PROPERTY_TYPE" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "ZIP_OR_POSTAL_CODE" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "SQUARE_FEET" : {
+      "MLFeatureShortDescription" : "Square footage of indoor areas"
+    },
+    "YEAR_BUILT" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "$\/SQUARE_FEET" : {
+      "MLFeatureShortDescription" : "Dollar cost per building square foot"
+    },
+    "LONGITUDE" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "LOT_SIZE" : {
+      "MLFeatureShortDescription" : "Square footage of full lot (includes outdoor spaces)"
+    },
+    "BEDS" : {
+      "MLFeatureShortDescription" : "--"
+    }
+  },
+  "TrainingInputs" : {
+
+  }
+}
