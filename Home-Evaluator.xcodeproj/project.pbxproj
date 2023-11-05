@@ -18,7 +18,7 @@
 		233DF6B12AF726500020F2F8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6B02AF726500020F2F8 /* LocationManager.swift */; };
 		2352C6B62AF788E600549584 /* SavedScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352C6B52AF788E600549584 /* SavedScan.swift */; };
 		2360AC442AF740F8007FB308 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360AC432AF740F8007FB308 /* ScannerView.swift */; };
-		F5F5A2AA2AF7777000BEC580 /* MyTabularRegressor 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5F5A2A92AF7776F00BEC580 /* MyTabularRegressor 1.mlmodel */; };
+		F5F5A2AE2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		233DF6B02AF726500020F2F8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2352C6B52AF788E600549584 /* SavedScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScan.swift; sourceTree = "<group>"; };
 		2360AC432AF740F8007FB308 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		F5F5A2A92AF7776F00BEC580 /* MyTabularRegressor 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "MyTabularRegressor 1.mlmodel"; sourceTree = "<group>"; };
+		F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "MyTabularRegressor 1.mlpackage"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 		233DF6982AF6D7300020F2F8 /* Home-Evaluator */ = {
 			isa = PBXGroup;
 			children = (
-				F5F5A2A92AF7776F00BEC580 /* MyTabularRegressor 1.mlmodel */,
+				F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */,
 				233DF6992AF6D7300020F2F8 /* Home_EvaluatorApp.swift */,
 				233DF69B2AF6D7300020F2F8 /* ContentView.swift */,
 				2360AC432AF740F8007FB308 /* ScannerView.swift */,
@@ -163,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5F5A2AA2AF7777000BEC580 /* MyTabularRegressor 1.mlmodel in Sources */,
+				F5F5A2AE2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage in Sources */,
 				233DF6AB2AF6F7120020F2F8 /* ListingCard.swift in Sources */,
 				2360AC442AF740F8007FB308 /* ScannerView.swift in Sources */,
 				233DF69C2AF6D7300020F2F8 /* ContentView.swift in Sources */,

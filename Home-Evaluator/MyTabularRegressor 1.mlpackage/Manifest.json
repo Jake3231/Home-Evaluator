@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "22221A14-0A91-4DD1-9DEC-462134828BD4": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        },
+        "50FAE15D-0D1C-4A5F-AD41-933DAC169C37": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "MyTabularRegressor 1.mlmodel",
+            "path": "com.apple.CoreML/MyTabularRegressor 1.mlmodel"
+        },
+        "9BF736CB-1F26-4ADC-A0D2-827C6DEB0735": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        }
+    },
+    "rootModelIdentifier": "50FAE15D-0D1C-4A5F-AD41-933DAC169C37"
+}
