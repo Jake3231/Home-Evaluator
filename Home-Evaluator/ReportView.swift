@@ -161,6 +161,36 @@ struct ReportView: View {
         .sheet(isPresented: $shouldShowFinalView) {
             ChatView(address: locationManager.fullAddress)
         }
+        ShareLink(item: FileManager.default.temporaryDirectory.appending(path: "Export").appending(path: "Capture"))
+        Button("Export") {
+            Task {
+                let builder = StructureBuilder(options: .beautifyObjects)
+                let destinationFolderURL = FileManager.default.temporaryDirectory.appending(path: "Export").appending(path: "Capture")
+                let destinationURL = destinationFolderURL.appending(path: "Structure.usdz")
+                let capturedRoomsURL = destinationFolderURL.appending(path: "Rooms.json")
+                let structure = try await builder.capturedStructure(from: capturedRooms)
+                try FileManager.default.createDirectory(at: destinationFolderURL, withIntermediateDirectories: true)
+                let jsonEncoder = JSONEncoder()
+                // print("ROOMS2: \(structure.rooms.count)")
+                let jsonData = try jsonEncoder.encode(capturedRooms)
+                try jsonData.write(to: capturedRoomsURL)
+                for room in capturedRooms {
+                    let capturedRoomURL = destinationFolderURL.appending(path: "Room-\(room.identifier.uuidString).json")
+                    let jsonEncoder = JSONEncoder()
+                    let jsonData = try jsonEncoder.encode(room)
+                    try jsonData.write(to: capturedRoomURL)
+                    let capturedRoomObjURL = destinationFolderURL.appending(path: "Room-\(room.identifier.uuidString).usdz")
+                    try room.export(to: capturedRoomObjURL, exportOptions: .parametric)
+                    
+                    
+                }
+                //try finalResults?.export(to: destinationURL, exportOptions: .parametric)
+                try structure.export(to: destinationURL, exportOptions: .parametric)
+            }
+            
+        }
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.capsule)
         Spacer()
     }
 }

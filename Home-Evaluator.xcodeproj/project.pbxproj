@@ -23,6 +23,8 @@
 		2352C6B62AF788E600549584 /* SavedScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352C6B52AF788E600549584 /* SavedScan.swift */; };
 		2352C6B82AF7A0F100549584 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352C6B72AF7A0F100549584 /* SummaryView.swift */; };
 		2360AC442AF740F8007FB308 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360AC432AF740F8007FB308 /* ScannerView.swift */; };
+		23911AE02AF7F4DA00F33E7F /* Structure.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 23911ADE2AF7F4DA00F33E7F /* Structure.usdz */; };
+		23911AE12AF7F4DA00F33E7F /* Structure.json in Resources */ = {isa = PBXBuildFile; fileRef = 23911ADF2AF7F4DA00F33E7F /* Structure.json */; };
 		F5F5A2AE2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,8 @@
 		2352C6B52AF788E600549584 /* SavedScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScan.swift; sourceTree = "<group>"; };
 		2352C6B72AF7A0F100549584 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		2360AC432AF740F8007FB308 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		23911ADE2AF7F4DA00F33E7F /* Structure.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Structure.usdz; sourceTree = "<group>"; };
+		23911ADF2AF7F4DA00F33E7F /* Structure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Structure.json; sourceTree = "<group>"; };
 		F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "MyTabularRegressor 1.mlpackage"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +92,7 @@
 		233DF6982AF6D7300020F2F8 /* Home-Evaluator */ = {
 			isa = PBXGroup;
 			children = (
+				23911ADD2AF7F4AB00F33E7F /* Scanned Apartment */,
 				F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */,
 				233DF6992AF6D7300020F2F8 /* Home_EvaluatorApp.swift */,
 				233DF69B2AF6D7300020F2F8 /* ContentView.swift */,
@@ -113,6 +118,15 @@
 				233DF6A12AF6D7330020F2F8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		23911ADD2AF7F4AB00F33E7F /* Scanned Apartment */ = {
+			isa = PBXGroup;
+			children = (
+				23911ADF2AF7F4DA00F33E7F /* Structure.json */,
+				23911ADE2AF7F4DA00F33E7F /* Structure.usdz */,
+			);
+			path = "Scanned Apartment";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +194,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				233DF6A22AF6D7330020F2F8 /* Preview Assets.xcassets in Resources */,
+				23911AE02AF7F4DA00F33E7F /* Structure.usdz in Resources */,
+				23911AE12AF7F4DA00F33E7F /* Structure.json in Resources */,
 				233DF69E2AF6D7330020F2F8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

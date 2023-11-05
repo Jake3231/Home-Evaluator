@@ -109,7 +109,7 @@ class RoomCaptureViewController: UIViewController, RoomCaptureViewDelegate {
         
         async {
         do {
-            print("ROOMS: \(capturedRooms.count)")
+            //print("ROOMS: \(capturedRooms.count)")
                 let builder = StructureBuilder(options: .beautifyObjects)
                 let structure = await try builder.capturedStructure(from: capturedRooms)
                 try FileManager.default.createDirectory(at: destinationFolderURL, withIntermediateDirectories: true)
