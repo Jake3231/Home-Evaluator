@@ -62,6 +62,7 @@ struct ContentView: View {
                             })
                             .buttonStyle(.borderedProminent)
                             .buttonBorderShape(.capsule)
+                            .tint(Color("HexPurple"))
                             //.frame(width: 50)
                             .padding()
                         })

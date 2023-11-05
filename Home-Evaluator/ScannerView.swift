@@ -39,21 +39,22 @@ struct ScannerView: View {
                         
                     }*/
                 }
-                .sheet(isPresented: $structureScanComplete, content: {
+               /* .sheet(isPresented: $structureScanComplete, content: {
                     //AddressView(locManager: locManager, image: UIImage(), capturedRooms: $results.capturedRooms)
-                    ReportView(capturedRooms: $results.capturedRooms)
-                })
+                    //ReportView(capturedRooms: $results.capturedRooms, locationManager: locManager)
+                    SummaryView()
+                })*/
                 .toolbar {
-                  /*  NavigationLink(isActive: $structureScanComplete, destination: {
-                        //ReportView(capturedRooms: $results.capturedRooms)
+                    NavigationLink(isActive: $structureScanComplete, destination: {
+                        ReportView(capturedRooms: $results.capturedRooms, locationManager: locManager)
                         //AddressView(locManager: locManager, image: UIImage())
-                    }) {*/
+                    }) {
                         Button("Complete Scan") {
                             structureScanComplete = true
                             isScanning = false
                         }
                         .buttonStyle(.bordered)
-                   // }
+                    }
                 }
             }
     }
