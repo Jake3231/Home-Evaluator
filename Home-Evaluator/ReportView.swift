@@ -18,10 +18,11 @@ struct ReportView: View {
     @State var shouldShowFinalView: Bool = false
     //@State var scenes: [String:SCNScene] = [:]
     var address: String = ""
+//    @State var fullAddress: String = ""
     var locationManager: LocationManager!
-	@State var valueEstimate: Double = -1.0
-	@State var model: MyTabularRegressor_1?
-	@State var input: MyTabularRegressor_1Input? = MyTabularRegressor_1Input(PROPERTY_TYPE: "Single Family Residential", CITY: "Richardson", ZIP_OR_POSTAL_CODE: 78641.0, BEDS: 4.0, BATHS: 2.5, SQUARE_FEET: 2294.0, LOT_SIZE: 3000.0, YEAR_BUILT: 2018.0, __SQUARE_FEET: 169.14, HOA_MONTH: 30.0, LATITUDE: 30.634521, LONGITUDE: -97.849760)
+    @State var valueEstimate: Double = -1.0
+    @State var model: MyTabularRegressor_1?
+    @State var input: MyTabularRegressor_1Input? = MyTabularRegressor_1Input(PROPERTY_TYPE: "Single Family Residential", CITY: "Richardson", ZIP_OR_POSTAL_CODE: 78641.0, BEDS: 4.0, BATHS: 2.5, SQUARE_FEET: 2294.0, LOT_SIZE: 3000.0, YEAR_BUILT: 2018.0, __SQUARE_FEET: 169.14, HOA_MONTH: 30.0, LATITUDE: 30.634521, LONGITUDE: -97.849760)
     @State var readyForML: Bool = false
     
     var body: some View {
@@ -45,39 +46,39 @@ struct ReportView: View {
             }
         }
         .onChange(of: readyForML) {
-			if model == nil {
-				let config = MLModelConfiguration()
-				config.computeUnits = .all
-				
-				do {
-					model = try MyTabularRegressor_1(configuration: config)
-				} catch {
-					print("Model instantiation failed.", error)
-				}
-			}
-			
-			guard let model = model else {
-				return
-			}
-		
+            if model == nil {
+                let config = MLModelConfiguration()
+                config.computeUnits = .all
+                
+                do {
+                    model = try MyTabularRegressor_1(configuration: config)
+                } catch {
+                    print("Model instantiation failed.", error)
+                }
+            }
+            
+            guard let model = model else {
+                return
+            }
+            
             CLGeocoder().reverseGeocodeLocation(locationManager.locManager.location!, completionHandler: {placemarks, error in
                 let zip = placemarks?.first?.postalCode
                 input?.ZIP_OR_POSTAL_CODE = try! Double.init(zip!, format: .number)
                 input?.SQUARE_FEET = Double(totalArea)
-			if let input = input {
-                print(input.ZIP_OR_POSTAL_CODE)
-                print(input.SQUARE_FEET)
-				do {
-					let output = try model.prediction(input: input)
-					valueEstimate = output.PRICE
-				} catch {
-					print("Prediction error occured.", error)
-				}
-			}
+                if let input = input {
+                    print(input.ZIP_OR_POSTAL_CODE)
+                    print(input.SQUARE_FEET)
+                    do {
+                        let output = try model.prediction(input: input)
+                        valueEstimate = output.PRICE
+                    } catch {
+                        print("Prediction error occured.", error)
+                    }
+                }
             })
-		}
+        }
         .padding(.bottom, 10)
-
+        
         List(capturedRooms, id: \.identifier) { room in
             /* Section(content: {
              ForEach(room.sections, id: \.label) { section in
@@ -103,9 +104,11 @@ struct ReportView: View {
                         .padding()
                     }
                     .listRowSeparator(.hidden)
-                .tint(Color("HexPurple"))
+                    .tint(Color("HexPurple"))
                 
-                NavigationLink(isActive: $shouldShowFinalView, destination: {ChatView()}, label: {
+                NavigationLink(isActive: $shouldShowFinalView, destination: {
+                    ChatView(address: locationManager.fullAddress)
+                }, label: {
                     Button(action: {shouldShowFinalView = true}, label: {
                         Label(
                             title: { Text("More Insights") },
@@ -119,20 +122,24 @@ struct ReportView: View {
                     .foregroundStyle(Color.white)
                     //.frame(width: 50)
                     .padding()
-                        .listRowSeparator(.hidden)
+                    .listRowSeparator(.hidden)
+                   /* .task {
+                        let addr = await locationManager.userAddressForGPT()
+                        fullAddress = addr ?? ""
+                    }*/
                 })
                 
             }
             //  })
-           /* DisclosureGroup(content: {
-                ForEach(room.sections, id: \.label) { section in
-                    //@State var modelReady: Bool = false
-                    Text(section.label.rawValue)
-                }
-            }, label: {
-                ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
-            })*/
-                .task {
+            /* DisclosureGroup(content: {
+             ForEach(room.sections, id: \.label) { section in
+             //@State var modelReady: Bool = false
+             Text(section.label.rawValue)
+             }
+             }, label: {
+             ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
+             })*/
+            .task {
                 
                 for floor in room.floors {
                     if (floor.category == .floor) {
@@ -175,7 +182,7 @@ struct ReportRow: View {
                     .overlay(alignment: .top) {
                         VStack {
                             SceneView(scene: scene, options: [.allowsCameraControl, .autoenablesDefaultLighting])
-                                //.ignoresSafeArea(edges: .top)
+                            //.ignoresSafeArea(edges: .top)
                                 .frame(height: 150)
                                 .clipped()
                             HStack {
@@ -194,7 +201,7 @@ struct ReportRow: View {
                     .frame(height: 210)
                     .clipped()
             } else {
-               ProgressView()
+                ProgressView()
                     .progressViewStyle(.circular)
                     .frame(width: 140, height: 130)
                     .task {

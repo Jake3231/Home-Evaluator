@@ -17,6 +17,7 @@ extension ChatView{
         func sendMessage(){
 			guard let openAIService = openAIService else {
 				print("Error on OAI service.")
+                return
 			}
 			
             let newMessage = Message(id: UUID(), role: .user, content:currentInput, createAt:Date())

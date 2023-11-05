@@ -3,7 +3,8 @@ import SwiftUI
 
 
 struct ChatView: View {
-    @ObservedObject var viewModel = ViewModel()
+    private var address: String?
+    @ObservedObject var viewModel: ViewModel
     var body: some View {
         VStack {
             ScrollView{
@@ -23,6 +24,11 @@ struct ChatView: View {
         .padding()
     }
     
+    init(address: String) {
+        self.address = address
+        self.viewModel = ViewModel(address: address)
+    }
+    
     func messageView(message: Message) -> some View {
         HStack {
             if message.role == .user { Spacer()}
@@ -37,6 +43,6 @@ struct ChatView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView()
+        ChatView(address: "2200 Waterview Pkwy Richardson, TX 75080 ")
     }
 }
