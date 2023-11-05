@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RoomPlan
+import CoreLocation
 
 struct ScannerView: View {
     @Binding var isScanning: Bool
@@ -14,13 +15,14 @@ struct ScannerView: View {
    // @Binding var capturedRooms: [CapturedRoom]
     @ObservedObject var results: CapturedRoomScan = .init(capturedRooms: [])
     var locManager: LocationManager!
+    @State var result: SavedScan = SavedScan(location: CLLocation())
     
     var body: some View {
         RoomScanViewController(isScanning: $isScanning, structureScanComplete: $structureScanComplete, results: results)
             //.navigationBarHidden(true)
             .ignoresSafeArea(edges: .top)
             .navigationBarBackButtonHidden()
-            .overlay(alignment: isScanning ? .bottom : .center) {
+            .overlay(alignment: .bottom) {
                 HStack {
                     Button(isScanning ? "Finish Room" : "Begin Room") {
                         isScanning.toggle()
@@ -46,14 +48,15 @@ struct ScannerView: View {
                 })*/
                 .toolbar {
                     NavigationLink(isActive: $structureScanComplete, destination: {
-                        ReportView(capturedRooms: $results.capturedRooms, locationManager: locManager)
-                        //AddressView(locManager: locManager, image: UIImage())
+                        ReportView(capturedRooms: $results.capturedRooms, result: $result, locationManager: locManager)
                     }) {
                         Button("Complete Scan") {
                             structureScanComplete = true
                             isScanning = false
+                            result = SavedScan(location: locManager.locManager.location!, title: "Title", shortStreetAddress: locManager.userAddress, fullStreetAddress: locManager.fullAddress, streetViewImage: nil)
                         }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(.borderedProminent)
+                        .tint(.green)
                     }
                 }
             }

@@ -40,13 +40,13 @@ struct AddressView: View {
                     image = await locManager.getSnapshotForLocation()
                 }
             Spacer()
-            NavigationLink(destination: ReportView(capturedRooms: $capturedRooms), label: {
+            /*NavigationLink(destination: ReportView(capturedRooms: $capturedRooms, result: <#SavedScan#>), label: {
                 Button("Confirm Address") {
                     
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-            })
+            })*/
         }
         //ListingCard(image: image, listing: locManager.locManager.location!)
     }

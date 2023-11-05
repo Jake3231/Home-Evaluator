@@ -38,9 +38,7 @@ struct ListingCard: View {
                     VStack(alignment: .leading) {
                         Text(title)
                             .font(.title.bold())
-                        Label(title: {
-                            Text(streetAddr)
-                        }, icon: {Image(systemName: "mappin.circle")})
+                        Label(streetAddr, systemImage: "pin")
                             .font(.subheadline)
                             .foregroundColor(.white)
                     }

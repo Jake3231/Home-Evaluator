@@ -18,6 +18,7 @@ struct ReportView: View {
     @State var shouldShowFinalView: Bool = false
     //@State var scenes: [String:SCNScene] = [:]
     var address: String = ""
+    @Binding var result: SavedScan
 //    @State var fullAddress: String = ""
     var locationManager: LocationManager!
     @State var valueEstimate: Double = -1.0
@@ -79,7 +80,7 @@ struct ReportView: View {
         }
         .padding(.bottom, 10)
         
-        List(capturedRooms, id: \.identifier) { room in
+        List {
             /* Section(content: {
              ForEach(room.sections, id: \.label) { section in
              //@State var modelReady: Bool = false
@@ -87,9 +88,26 @@ struct ReportView: View {
              }
              }, header: {*/
             //Text(String(areaInSqFt[room.identifier.uuidString] ?? 0.0) + " sq ft")
+            Section("House") {
+                StructureModelRow(rooms: $capturedRooms)
+            }
             Section("Rooms") {
-                ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
-                    .listRowSeparator(.hidden)
+                ForEach(capturedRooms, id: \.identifier) {room in
+                    ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
+                        .listRowSeparator(.hidden)
+                        .task {
+                            for floor in room.floors {
+                                if (floor.category == .floor) {
+                                    print(floor.dimensions)
+                                    let areaEstimate = floor.dimensions.x * floor.dimensions.y
+                                    totalArea += areaEstimate * 10.7639
+                                    print("total area: \(totalArea)")
+                                    areaInSqFt[room.identifier.uuidString] =  (areaInSqFt[room.identifier.uuidString] ?? 0.0) + areaEstimate * 10.7639
+                                }
+                            }
+                            readyForML = true
+                        }
+                }
             }
             Section("My Insights") {
                 RoundedRectangle(cornerRadius: 20)
@@ -130,39 +148,67 @@ struct ReportView: View {
                 })
                 
             }
-            //  })
-            /* DisclosureGroup(content: {
-             ForEach(room.sections, id: \.label) { section in
-             //@State var modelReady: Bool = false
-             Text(section.label.rawValue)
-             }
-             }, label: {
-             ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
-             })*/
-            .task {
-                
-                for floor in room.floors {
-                    if (floor.category == .floor) {
-                        print(floor.dimensions)
-                        let areaEstimate = floor.dimensions.x * floor.dimensions.y
-                        totalArea += areaEstimate * 10.7639
-                        print("total area: \(totalArea)")
-                        areaInSqFt[room.identifier.uuidString] =  (areaInSqFt[room.identifier.uuidString] ?? 0.0) + areaEstimate * 10.7639
-                    }
-                }
-                readyForML = true
-            }
         }
-        .navigationTitle("2200 Waterview Pkwy")
+        .navigationTitle(result.shortStreetAddress ?? result.title)
         .listStyle(.plain)
         Spacer()
-        NavigationLink(destination: SummaryView(totalEstimate: valueEstimate), isActive: $shouldShowFinalView, label: {
+        /*NavigationLink(destination: SummaryView(totalEstimate: valueEstimate), isActive: $shouldShowFinalView, label: {
             Button("Continue") {
                 shouldShowFinalView = true
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
-        })
+        })*/
+    }
+}
+
+struct StructureModelRow: View {
+    @State var modelReady: Bool = false
+    @State var scene: SCNScene!
+    @State var structure: CapturedStructure!
+    @Binding var rooms: [CapturedRoom]
+    
+    var body: some View {
+        HStack {
+            if modelReady {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.secondary, lineWidth: 1)
+                    .foregroundStyle(.black.secondary)
+                    .overlay(alignment: .top) {
+                        VStack {
+                            SceneView(scene: scene, options: [.allowsCameraControl, .autoenablesDefaultLighting])
+                            //.ignoresSafeArea(edges: .top)
+                                .frame(height: 150)
+                                .clipped()
+                        }
+                        .clipped()
+                    }
+                    .frame(height: 150)
+                    .clipped()
+            } else {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .frame(width: 140, height: 130)
+                    .onChange(of: rooms, {x, y in
+                        Task {
+                            let builder = StructureBuilder(options: .beautifyObjects)
+                            structure = try! await builder.capturedStructure(from: rooms)
+                            let destinationFolderURL = FileManager.default.temporaryDirectory.appending(path: "Export")
+                            let destinationURL = destinationFolderURL.appending(path: "Structure-\(structure.identifier.uuidString).usdz")
+                            //sceneURL = destinationURL
+                            try! structure.export(to: destinationURL)
+                            scene = try! SCNScene(url: destinationURL, options: [.checkConsistency: true])
+                            modelReady = true
+                            print("structure model ready")
+                        }
+                    })
+                    .task {
+
+                    }
+            }
+        }
+        .listRowSeparator(.hidden)
+        .listRowSpacing(20)
     }
 }
 
@@ -220,5 +266,13 @@ struct ReportRow: View {
 }
 
 #Preview {
-    ReportView(capturedRooms: .constant([]))
+    ReportView(capturedRooms: .constant([]), result: .constant(SavedScan(location: CLLocation())))
+}
+
+extension CapturedRoom: Equatable {
+    public static func == (lhs: CapturedRoom, rhs: CapturedRoom) -> Bool {
+        lhs.identifier == rhs.identifier
+    }
+    
+    
 }

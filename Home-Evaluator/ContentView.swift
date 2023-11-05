@@ -22,34 +22,39 @@ struct ContentView: View {
         NavigationStack {
             ZStack {
                 List(defaultScans) { scan in
-                    /*  NavigationLink("", isActive: $isScanning) {
-                     ScannerView(isScanning: $isScanning, structureScanComplete: $structureScanComplete, results: results, locManager: locManager)
-                     }*/
-                    ListingCard(locationManger: locManager, title: scan.title, streetAddr: scan.streetAddress ?? "", listing: scan.location)
+                    ListingCard(locationManger: locManager, title: scan.title, streetAddr: scan.shortStreetAddress ?? "", listing: scan.location)
                 }
                 .searchable(text: $searchText, prompt: "Search Properties...")
                 .listStyle(.plain)
-                .navigationTitle("Hex")
+                //.navigationTitle("Hex")
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Image("Hex")
+                        HStack {
+                            Image("Hex")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                            Text("Hex")
+                                .font(.largeTitle.bold())
+                        }
                     }
                     ToolbarItemGroup(placement: .secondaryAction) {
-                        Button(action: {print("hi")}, label: {Image(systemName: "gear")})
+                        Button(action: {print("settings")}, label: {
+                            Image(systemName: "gear")})
                     }
-                    /*ToolbarItemGroup(placement: .bottomBar, content: {
-                     Button(action: {isScanning = true}, label: {
-                     Image(systemName: "plus")
-                     .symbolVariant(.circle.fill)
-                     .symbolRenderingMode(.hierarchical
-                     )
-                     })
-                     .controlSize(.large)
-                     })*/
                 }
                 .task {
                     locManager.checkAvailability()
                 }
+                VStack {
+                    Spacer()
+                    Rectangle()
+                        .foregroundColor(.black)
+                        .frame(height: 200)
+                        .blur(radius: 50)
+                }
+                .padding([.bottom, .leading, .trailing], -30)
+                .ignoresSafeArea(edges: .bottom)
                 .overlay(alignment: .bottom) {
                     NavigationLink(isActive: $isScanning, destination: {
                         ScannerView(isScanning: $isScanning, structureScanComplete: $structureScanComplete, results: results, locManager: locManager)}, label: {
@@ -63,7 +68,6 @@ struct ContentView: View {
                             .buttonStyle(.borderedProminent)
                             .buttonBorderShape(.capsule)
                             .tint(Color("HexPurple"))
-                            //.frame(width: 50)
                             .padding()
                         })
                     

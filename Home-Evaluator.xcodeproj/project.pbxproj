@@ -338,6 +338,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Hex;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to understand the building's floorplan";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is used to determine your home value";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location is used to determine your home value";
@@ -380,6 +381,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Hex;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to understand the building's floorplan";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is used to determine your home value";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location is used to determine your home value";
