@@ -23,6 +23,7 @@
 		2352C6B62AF788E600549584 /* SavedScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352C6B52AF788E600549584 /* SavedScan.swift */; };
 		2352C6B82AF7A0F100549584 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352C6B72AF7A0F100549584 /* SummaryView.swift */; };
 		2360AC442AF740F8007FB308 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360AC432AF740F8007FB308 /* ScannerView.swift */; };
+		F5E2A3292AF7DE4A00EAEB5D /* RoomDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E2A3282AF7DE4A00EAEB5D /* RoomDetailsView.swift */; };
 		F5F5A2AE2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		2352C6B52AF788E600549584 /* SavedScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScan.swift; sourceTree = "<group>"; };
 		2352C6B72AF7A0F100549584 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		2360AC432AF740F8007FB308 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		F5E2A3282AF7DE4A00EAEB5D /* RoomDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDetailsView.swift; sourceTree = "<group>"; };
 		F5F5A2AD2AF79AF900BEC580 /* MyTabularRegressor 1.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "MyTabularRegressor 1.mlpackage"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				233DF69D2AF6D7330020F2F8 /* Assets.xcassets */,
 				233DF69F2AF6D7330020F2F8 /* Home_Evaluator.entitlements */,
 				233DF6A02AF6D7330020F2F8 /* Preview Content */,
+				F5E2A3282AF7DE4A00EAEB5D /* RoomDetailsView.swift */,
 			);
 			path = "Home-Evaluator";
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				233DF6AB2AF6F7120020F2F8 /* ListingCard.swift in Sources */,
 				2360AC442AF740F8007FB308 /* ScannerView.swift in Sources */,
 				233DF69C2AF6D7300020F2F8 /* ContentView.swift in Sources */,
+				F5E2A3292AF7DE4A00EAEB5D /* RoomDetailsView.swift in Sources */,
 				232A8E2C2AF7C52C0035ADCA /* ChatView.swift in Sources */,
 				233DF69A2AF6D7300020F2F8 /* Home_EvaluatorApp.swift in Sources */,
 				232A8E312AF7C54B0035ADCA /* OpenAIService.swift in Sources */,

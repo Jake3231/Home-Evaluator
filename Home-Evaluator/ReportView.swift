@@ -29,7 +29,7 @@ struct ReportView: View {
     @State var readyForML: Bool = false
     
     var body: some View {
-        HStack {
+		HStack {
             VStack(alignment: .leading) {
                 Text("VALUATION")
                 Text(valueEstimate, format: .currency(code: "USD"))
