@@ -26,14 +26,13 @@ struct ContentView: View {
                 }
                 .searchable(text: $searchText, prompt: "Search Properties...")
                 .listStyle(.plain)
-                //.navigationTitle("Hex")
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         HStack {
                             Image("Hex")
                                 .resizable()
                                 .scaledToFit()
-                                .padding(2)
+                                .padding(5)
                             Text("Hex")
                                 .font(.largeTitle.bold())
                         }

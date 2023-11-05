@@ -7,18 +7,25 @@ struct ChatView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         VStack {
+            Text("Your Personal AI Realtor")
             ScrollView{
-                ForEach(viewModel.messages, id: \.id){ message in 
+                ForEach(viewModel.messages, id: \.id){ message in
                     messageView(message: message)
                 }
             }
             HStack{
-                TextField("Enter a message...", text: $viewModel.currentInput)
+                TextField("Ask Hex...", text: $viewModel.currentInput)
                 Button{
                     viewModel.sendMessage()
                 } label: {
                     Text("Send")
                 }
+            }
+        }
+        .overlay {
+            if viewModel.messages.isEmpty {
+                Image("Hex")
+                    .frame(width: 150, height: 150)
             }
         }
         .padding()
@@ -35,9 +42,9 @@ struct ChatView: View {
             Text(try! AttributedString(markdown: message.content.replacingOccurrences(of: "\\n", with: "\n")))
                 .padding()
                 .background(message.role == .user ? Color.blue : Color.gray.opacity(0.2))
-            if message.role == .assistant { Spacer()}
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            if message.role == .assistant {Spacer()}
         }
-        .cornerRadius(5)
     }
 }
 

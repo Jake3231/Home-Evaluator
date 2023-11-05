@@ -17,6 +17,8 @@ struct ReportView: View {
     @State var totalArea: Float = 0.0
     @State var shouldShowFinalView: Bool = false
     //@State var scenes: [String:SCNScene] = [:]
+    @State var numBathrooms: Float = 0.0
+    @State var numBedrooms: Int = 0
     var address: String = ""
     @Binding var result: SavedScan
 //    @State var fullAddress: String = ""
@@ -36,7 +38,7 @@ struct ReportView: View {
             .padding(.trailing, 10)
             VStack(alignment: .leading) {
                 Text("BED/BATH")
-                Text("4/2")
+                Text("\(numBedrooms)/\(numBathrooms)")
                     .foregroundStyle(.secondary)
             }
             .padding(.trailing, 10)
@@ -44,6 +46,20 @@ struct ReportView: View {
                 Text("TOTAL SQ. Ft")
                 Text("\(totalArea) Sq ft")
                     .foregroundStyle(.secondary)
+            }
+        }
+        .task {
+            for room in capturedRooms {
+                for section in room.sections {
+                    switch section.label {
+                    case .bedroom:
+                        numBedrooms += 1
+                    case .bathroom:
+                        numBathrooms += 1.0
+                    default:
+                        break
+                    }
+                }
             }
         }
         .onChange(of: readyForML) {
@@ -91,6 +107,7 @@ struct ReportView: View {
             Section("House") {
                 StructureModelRow(rooms: $capturedRooms)
             }
+            .listSectionSpacing(50)
             Section("Rooms") {
                 ForEach(capturedRooms, id: \.identifier) {room in
                     ReportRow(room: room, roomSqFt: areaInSqFt[room.identifier.uuidString] ?? 0.0)
@@ -124,41 +141,27 @@ struct ReportView: View {
                     .listRowSeparator(.hidden)
                     .tint(Color("HexPurple"))
                 
-                NavigationLink(isActive: $shouldShowFinalView, destination: {
-                    ChatView(address: locationManager.fullAddress)
-                }, label: {
                     Button(action: {shouldShowFinalView = true}, label: {
                         Label(
                             title: { Text("More Insights") },
                             icon: { Image(systemName: "lightbulb.max") }
                         )
                         .frame(width: 300, height: 30)
-                    })
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.capsule)
                     .tint(Color("HexPurple"))
                     .foregroundStyle(Color.white)
-                    //.frame(width: 50)
                     .padding()
-                    .listRowSeparator(.hidden)
-                   /* .task {
-                        let addr = await locationManager.userAddressForGPT()
-                        fullAddress = addr ?? ""
-                    }*/
                 })
-                
+                    .listRowSeparator(.hidden)
             }
         }
         .navigationTitle(result.shortStreetAddress ?? result.title)
         .listStyle(.plain)
+        .sheet(isPresented: $shouldShowFinalView) {
+            ChatView(address: locationManager.fullAddress)
+        }
         Spacer()
-        /*NavigationLink(destination: SummaryView(totalEstimate: valueEstimate), isActive: $shouldShowFinalView, label: {
-            Button("Continue") {
-                shouldShowFinalView = true
-            }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.capsule)
-        })*/
     }
 }
 
@@ -208,7 +211,6 @@ struct StructureModelRow: View {
             }
         }
         .listRowSeparator(.hidden)
-        .listRowSpacing(20)
     }
 }
 
@@ -228,7 +230,6 @@ struct ReportRow: View {
                     .overlay(alignment: .top) {
                         VStack {
                             SceneView(scene: scene, options: [.allowsCameraControl, .autoenablesDefaultLighting])
-                            //.ignoresSafeArea(edges: .top)
                                 .frame(height: 150)
                                 .clipped()
                             HStack {
@@ -260,7 +261,6 @@ struct ReportRow: View {
                         print("model ready")
                     }
             }
-            //Button()
         }
     }
 }

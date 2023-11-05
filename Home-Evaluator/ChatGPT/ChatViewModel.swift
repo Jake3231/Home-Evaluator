@@ -27,10 +27,14 @@ extension ChatView{
             Task {
                 let response = await openAIService.SendMessage(input: newMessage.content)
                 guard let received = response else {
-                    print("BRUH")
+                    print("Error")
                     return
                 }
-                let receivedMessage = Message(id: UUID(), role: .assistant, content:received, createAt: Date())
+                var mutableResponse = received
+                if mutableResponse.hasPrefix("\"") {mutableResponse.removeFirst()}
+                if mutableResponse.hasSuffix("\"") {mutableResponse.removeLast()}
+                
+                let receivedMessage = Message(id: UUID(), role: .assistant, content:mutableResponse, createAt: Date())
             await MainActor.run(body: {
                     messages.append(receivedMessage)
                 })

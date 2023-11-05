@@ -24,10 +24,15 @@ struct ScannerView: View {
             .navigationBarBackButtonHidden()
             .overlay(alignment: .bottom) {
                 HStack {
-                    Button(isScanning ? "Finish Room" : "Begin Room") {
+                   Button(isScanning ? "Finish Room" : "Begin Room") {
                         isScanning.toggle()
                     }
                     .buttonStyle(.bordered)
+                    /*Button(action: {}, label: {
+                        Circle()
+                            .frame(width: 90, height: 90)
+                    })
+                    .padding(.bottom, 200)*/
                     
                   /*  NavigationLink(isActive: $structureScanComplete, destination: {
                         ReportView(capturedRooms: $results.capturedRooms)

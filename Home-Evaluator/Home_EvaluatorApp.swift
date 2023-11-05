@@ -12,6 +12,7 @@ struct Home_EvaluatorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.dark)
         }
     }
 }

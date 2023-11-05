@@ -11,7 +11,6 @@ class OpenAIService {
 	}
     
     func SendMessage(input: String) async -> String? {
-        print("SENDING WITH \(address)")
 		guard let address = address else {
 			return "No address."
 		}
