@@ -11,6 +11,9 @@
 		233DF69C2AF6D7300020F2F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF69B2AF6D7300020F2F8 /* ContentView.swift */; };
 		233DF69E2AF6D7330020F2F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 233DF69D2AF6D7330020F2F8 /* Assets.xcassets */; };
 		233DF6A22AF6D7330020F2F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 233DF6A12AF6D7330020F2F8 /* Preview Assets.xcassets */; };
+		233DF6A92AF6DB8B0020F2F8 /* RoomCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6A82AF6DB8B0020F2F8 /* RoomCaptureViewController.swift */; };
+		233DF6AB2AF6F7120020F2F8 /* ListingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6AA2AF6F7120020F2F8 /* ListingCard.swift */; };
+		233DF6AD2AF70CB00020F2F8 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233DF6AC2AF70CB00020F2F8 /* ReportView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		233DF69D2AF6D7330020F2F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		233DF69F2AF6D7330020F2F8 /* Home_Evaluator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Home_Evaluator.entitlements; sourceTree = "<group>"; };
 		233DF6A12AF6D7330020F2F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		233DF6A82AF6DB8B0020F2F8 /* RoomCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomCaptureViewController.swift; sourceTree = "<group>"; };
+		233DF6AA2AF6F7120020F2F8 /* ListingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCard.swift; sourceTree = "<group>"; };
+		233DF6AC2AF70CB00020F2F8 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 			children = (
 				233DF6992AF6D7300020F2F8 /* Home_EvaluatorApp.swift */,
 				233DF69B2AF6D7300020F2F8 /* ContentView.swift */,
+				233DF6AC2AF70CB00020F2F8 /* ReportView.swift */,
+				233DF6AA2AF6F7120020F2F8 /* ListingCard.swift */,
+				233DF6A82AF6DB8B0020F2F8 /* RoomCaptureViewController.swift */,
 				233DF69D2AF6D7330020F2F8 /* Assets.xcassets */,
 				233DF69F2AF6D7330020F2F8 /* Home_Evaluator.entitlements */,
 				233DF6A02AF6D7330020F2F8 /* Preview Content */,
@@ -139,8 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				233DF6AB2AF6F7120020F2F8 /* ListingCard.swift in Sources */,
 				233DF69C2AF6D7300020F2F8 /* ContentView.swift in Sources */,
 				233DF69A2AF6D7300020F2F8 /* Home_EvaluatorApp.swift in Sources */,
+				233DF6AD2AF70CB00020F2F8 /* ReportView.swift in Sources */,
+				233DF6A92AF6DB8B0020F2F8 /* RoomCaptureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +286,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to understand the building's floorplan";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -312,6 +325,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to understand the building's floorplan";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
